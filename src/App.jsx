@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 const App = () => {
 
   const location = useLocation();
-  const hideNavbarPath = ['/login', '/signup', "*" ];
+  const hideNavbarPath = ['/login', '/signup'];
   const knowpath = ['/', '/login', '/signup', '/']
   const shouldShowNavbar = knowpath.includes(location.pathname) && !hideNavbarPath.includes(location.pathname);
 
