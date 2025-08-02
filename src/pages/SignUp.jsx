@@ -1,14 +1,26 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const SignUp = () => {
   
       const {register, handleSubmit, formState: { errors }, reset, watch} = useForm();
   
-      const onSubmit = (data) => {
-       console.log("Form Submitted successfully");
-       console.log("Form Data", data);
-      reset();
+      const onSubmit = async (data) => {
+        try{
+            const response = await axios.post('http://localhost:5000/api/register', {
+                name: data.name,
+                email: data.email,
+                password: data.password,
+            });
+
+            console.log("backend response", response.data);
+            alert("User registered successfully");
+            reset();
+        } catch(error) {
+            console.log("Register failed", error.response?.data?.message || error.message);
+            alert(error.response?.data?.message || "Registration failed");
+        }
       }
   
   
