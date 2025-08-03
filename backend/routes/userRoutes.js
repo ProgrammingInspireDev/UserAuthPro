@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
 
 
 const router = express.Router();
@@ -48,8 +49,11 @@ router.post('/login', async(req, res) => {
             return res.status(401).json({message: 'Invalid email or password'});
         }
 
+        const token = jwt.sign({userId: user._id, email: user.email}, process.env.JWT_SECRET, {expiresIn: '1m'})
+
         res.status(200).json({
             message: 'Login Successful',
+            token,
             user: {
                 id: user._id,
                 name: user.name,
