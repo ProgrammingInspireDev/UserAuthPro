@@ -11,7 +11,7 @@ const connectDB = async () => {
         console.log(`MongoDB connected ${conn.connection.host}`)
     } catch(error) {
         console.log('MonogoDB connection failed: ', error.message);
-        porocess.exist(1);
+        process.exist(1);
     }
 };
 

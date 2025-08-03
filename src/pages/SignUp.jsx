@@ -1,8 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+        const navigate = useNavigate();
   
       const {register, handleSubmit, formState: { errors }, reset, watch} = useForm();
   
@@ -17,6 +19,7 @@ const SignUp = () => {
             console.log("backend response", response.data);
             alert("User registered successfully");
             reset();
+            navigate('/');
         } catch(error) {
             console.log("Register failed", error.response?.data?.message || error.message);
             alert(error.response?.data?.message || "Registration failed");
@@ -51,6 +54,15 @@ const SignUp = () => {
               </div>
   
               <button type='submit' className='border w-50 h-10 mb-10 bg-amber-700 '>Submit</button>
+              <p className='text-sm'>
+                    Already have an account?{" "}
+                    <span
+                        className='text-blue-600 underline cursor-pointer'
+                        onClick={() => navigate('/')}
+                    >
+                        SignIn
+                    </span>
+                </p>
           </form>
           </div>
       )
